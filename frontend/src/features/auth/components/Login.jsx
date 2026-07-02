@@ -62,7 +62,7 @@ export const Login = () => {
         {
           !is900 && 
        
-        <Stack bgcolor={'black'} flex={1} justifyContent={'center'} >
+        <Stack sx={{background:'linear-gradient(135deg, #0D47A1 0%, #1565C0 60%, #42A5F5 100%)'}} flex={1} justifyContent={'center'} >
           <Lottie animationData={ecommerceOutlookAnimation}/>
         </Stack> 
         }
@@ -72,8 +72,8 @@ export const Login = () => {
               <Stack flexDirection={'row'} justifyContent={'center'} alignItems={'center'}>
 
                 <Stack rowGap={'.4rem'}>
-                  <Typography variant='h2' sx={{wordBreak:"break-word"}} fontWeight={600}>Mern Shop</Typography>
-                  <Typography alignSelf={'flex-end'} color={'GrayText'} variant='body2'>- Shop Anything</Typography>
+                  <Typography variant='h2' sx={{wordBreak:"break-word"}} fontWeight={700}>SmartCart</Typography>
+                  <Typography alignSelf={'flex-end'} color={'GrayText'} variant='body2'>- Shop Smarter, Live Better</Typography>
                 </Stack>
 
               </Stack>

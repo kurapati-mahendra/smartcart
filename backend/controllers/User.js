@@ -3,7 +3,11 @@ const User=require("../models/User")
 exports.getById=async(req,res)=>{
     try {
         const {id}=req.params
-        const result=(await User.findById(id)).toObject()
+        const user=await User.findById(id)
+        if(!user){
+            return res.status(404).json({message:'User not found'})
+        }
+        const result=user.toObject()
         delete result.password
         res.status(200).json(result)
         
@@ -15,7 +19,11 @@ exports.getById=async(req,res)=>{
 exports.updateById=async(req,res)=>{
     try {
         const {id}=req.params
-        const updated=(await User.findByIdAndUpdate(id,req.body,{new:true})).toObject()
+        const user=await User.findByIdAndUpdate(id,req.body,{new:true})
+        if(!user){
+            return res.status(404).json({message:'User not found'})
+        }
+        const updated=user.toObject()
         delete updated.password
         res.status(200).json(updated)
 

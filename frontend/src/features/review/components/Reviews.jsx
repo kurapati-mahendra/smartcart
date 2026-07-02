@@ -84,7 +84,7 @@ export const Reviews = ({productId,averageRating}) => {
         1:0
     }
 
-    reviews.map((review)=>{
+    reviews.forEach((review)=>{
         ratingCounts[review.rating]=ratingCounts[review.rating]+1
     })
 

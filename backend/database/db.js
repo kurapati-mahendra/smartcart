@@ -1,5 +1,9 @@
 require('dotenv').config()
 const mongoose=require("mongoose")
+const dns = require("node:dns")
+
+// Force Node's DNS resolver to use Google and Cloudflare DNS to avoid querySrv ECONNREFUSED errors
+dns.setServers(["8.8.8.8", "1.1.1.1"])
 
 exports.connectToDB=async()=>{
     try {

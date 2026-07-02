@@ -18,6 +18,9 @@ import { selectWishlistItems } from '../../wishlist/WishlistSlice';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TuneIcon from '@mui/icons-material/Tune';
 import { selectProductIsFilterOpen, toggleFilters } from '../../products/ProductSlice';
+import { useColorMode } from '../../../theme/ThemeContext';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 
 
 
@@ -34,6 +37,7 @@ export const Navbar=({isProductList=false})=> {
 
   const wishlistItems=useSelector(selectWishlistItems)
   const isProductFilterOpen=useSelector(selectProductIsFilterOpen)
+  const { toggleColorMode, mode } = useColorMode()
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -55,12 +59,10 @@ export const Navbar=({isProductList=false})=> {
   ];
 
   return (
-    <AppBar position="sticky" sx={{backgroundColor:"white",boxShadow:"none",color:"text.primary"}}>
+    <AppBar position="sticky" sx={{background:`linear-gradient(90deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,boxShadow:`0 2px 20px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.5)' : 'rgba(92,45,145,0.3)'}`,color:"white"}}>
         <Toolbar sx={{p:1,height:"4rem",display:"flex",justifyContent:"space-around"}}>
 
-          <Typography variant="h6" noWrap component="a" href="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' },fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}>
-            MERN SHOP
-          </Typography>
+          <Typography variant="h6" noWrap component="a" href="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' },fontWeight: 800, letterSpacing: '.15rem', color: 'white', textDecoration: 'none', }}>            SmartCart          </Typography>
 
 
 
@@ -101,7 +103,7 @@ export const Navbar=({isProductList=false})=> {
                 </MenuItem>
               ))}
             </Menu>
-            <Typography variant='h6' fontWeight={300}>{is480?`${userInfo?.name.toString().split(" ")[0]}`:`Hey👋, ${userInfo?.name}`}</Typography>
+            <Typography variant='h6' fontWeight={300} sx={{color:'white'}}>{is480?`${userInfo?.name.toString().split(" ")[0]}`:`Hey👋, ${userInfo?.name}`}</Typography>
             {loggedInUser.isAdmin && <Button variant='contained'>Admin</Button>}
             <Stack sx={{flexDirection:"row",columnGap:"1rem",alignItems:"center",justifyContent:"center"}}>
 
@@ -124,8 +126,11 @@ export const Navbar=({isProductList=false})=> {
                   </Stack>
             }
             {
-              isProductList && <IconButton onClick={handleToggleFilters}><TuneIcon sx={{color:isProductFilterOpen?"black":""}}/></IconButton>
+              isProductList && <IconButton onClick={handleToggleFilters}><TuneIcon sx={{color:isProductFilterOpen?"#90CAF9":"white"}}/></IconButton>
             }
+            <IconButton onClick={toggleColorMode} sx={{color:'white'}}>
+              {mode === 'dark' ? <LightModeOutlinedIcon/> : <DarkModeOutlinedIcon/>}
+            </IconButton>
             
             </Stack>
           </Stack>

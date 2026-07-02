@@ -44,7 +44,7 @@ exports.getAll = async (req, res) => {
             limit=pageSize
         }
 
-        const totalDocs=await Product.find(filter).sort(sort).populate("brand").countDocuments().exec()
+        const totalDocs=await Product.countDocuments(filter).exec()
         const results=await Product.find(filter).sort(sort).populate("brand").skip(skip).limit(limit).exec()
 
         res.set("X-Total-Count",totalDocs)

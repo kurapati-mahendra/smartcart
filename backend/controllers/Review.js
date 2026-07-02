@@ -3,9 +3,10 @@ const Review=require("../models/Review")
 exports.create=async(req,res)=>{
     try {
         console.log(req.body);
-        const created=await new Review(req.body).populate({path:'user',select:"-password"})
-        await created.save()
-        res.status(201).json(created)
+        const review=new Review(req.body)
+        const saved=await review.save()
+        const populated=await saved.populate({path:'user',select:"-password"})
+        res.status(201).json(populated)
     } catch (error) {
         console.log(error);
         return res.status(500).json({message:'Error posting review, please trying again later'})

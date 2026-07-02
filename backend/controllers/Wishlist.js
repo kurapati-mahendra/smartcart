@@ -2,9 +2,10 @@ const Wishlist = require("../models/Wishlist")
 
 exports.create=async(req,res)=>{
     try {
-        const created=await new Wishlist(req.body).populate({path:"product",populate:["brand"]})
-        await created.save()
-        res.status(201).json(created)
+        const wishlist = new Wishlist(req.body)
+        const saved = await wishlist.save()
+        const populated = await saved.populate({path:"product",populate:["brand"]})
+        res.status(201).json(populated)
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"Error adding product to wishlist, please try again later"})

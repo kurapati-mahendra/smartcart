@@ -2,9 +2,10 @@ const Cart=require('../models/Cart')
 
 exports.create=async(req,res)=>{
     try {
-        const created=await new Cart(req.body).populate({path:"product",populate:{path:"brand"}});
-        await created.save()
-        res.status(201).json(created)
+        const cartItem=new Cart(req.body)
+        const saved=await cartItem.save()
+        const populated=await saved.populate({path:"product",populate:{path:"brand"}})
+        res.status(201).json(populated)
     } catch (error) {
         console.log(error);
         return res.status(500).json({message:'Error adding product to cart, please trying again later'})

@@ -24,8 +24,10 @@ const seedData=async()=>{
         await seedOrder()
 
         console.log('Seed completed..');
+        process.exit(0);
     } catch (error) {
         console.log(error);
+        process.exit(1);
     }
 }
 

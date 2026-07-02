@@ -34,7 +34,7 @@ exports.getAll = async (req, res) => {
             limit=pageSize
         }
 
-        const totalDocs=await Order.find({}).countDocuments().exec()
+        const totalDocs=await Order.countDocuments({}).exec()
         const results=await Order.find({}).skip(skip).limit(limit).exec()
 
         res.header("X-Total-Count",totalDocs)

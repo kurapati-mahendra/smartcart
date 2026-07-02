@@ -33,7 +33,7 @@ exports.signup=async(req,res)=>{
         // sending jwt token in the response cookies
         res.cookie('token',token,{
             sameSite:process.env.PRODUCTION==='true'?"None":'Lax',
-            maxAge:new Date(Date.now() + (parseInt(process.env.COOKIE_EXPIRATION_DAYS * 24 * 60 * 60 * 1000))),
+            maxAge:parseInt(process.env.COOKIE_EXPIRATION_DAYS || '7') * 24 * 60 * 60 * 1000,
             httpOnly:true,
             secure:process.env.PRODUCTION==='true'?true:false
         })
@@ -63,7 +63,7 @@ exports.login=async(req,res)=>{
             // sending jwt token in the response cookies
             res.cookie('token',token,{
                 sameSite:process.env.PRODUCTION==='true'?"None":'Lax',
-                maxAge:new Date(Date.now() + (parseInt(process.env.COOKIE_EXPIRATION_DAYS * 24 * 60 * 60 * 1000))),
+                maxAge:parseInt(process.env.COOKIE_EXPIRATION_DAYS || '7') * 24 * 60 * 60 * 1000,
                 httpOnly:true,
                 secure:process.env.PRODUCTION==='true'?true:false
             })
@@ -140,8 +140,8 @@ exports.resendOtp=async(req,res)=>{
 
         res.status(201).json({'message':"OTP sent"})
     } catch (error) {
-        res.status(500).json({'message':"Some error occured while resending otp, please try again later"})
         console.log(error);
+        res.status(500).json({'message': error.message || "Some error occured while resending otp, please try again later"})
     }
 }
 
@@ -234,7 +234,7 @@ exports.resetPassword=async(req,res)=>{
 
 exports.logout=async(req,res)=>{
     try {
-        res.cookie('token',{
+        res.cookie('token','',{
             maxAge:0,
             sameSite:process.env.PRODUCTION==='true'?"None":'Lax',
             httpOnly:true,
