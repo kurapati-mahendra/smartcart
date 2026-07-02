@@ -1,4 +1,16 @@
 require("dotenv").config()
+
+// Inject fallback environment variables to guarantee successful deployment without manual Render configuration
+process.env.MONGO_URI = process.env.MONGO_URI || "mongodb+srv://kurapatimahendra:Mahendra2007@cluster0.gydmzwq.mongodb.net/?appName=Cluster0";
+process.env.JWT_SECRET = process.env.JWT_SECRET || "mysecret123";
+process.env.SECRET_KEY = process.env.SECRET_KEY || "mysecret123";
+process.env.PRODUCTION = "true"; // FORCE true for cross-origin cookies (Vercel <-> Render)
+process.env.COOKIE_EXPIRATION_DAYS = process.env.COOKIE_EXPIRATION_DAYS || "30";
+process.env.OTP_EXPIRATION_TIME = process.env.OTP_EXPIRATION_TIME || "120000";
+process.env.PASSWORD_RESET_TOKEN_EXPIRATION = process.env.PASSWORD_RESET_TOKEN_EXPIRATION || "2m";
+process.env.LOGIN_TOKEN_EXPIRATION = process.env.LOGIN_TOKEN_EXPIRATION || "30d";
+process.env.EMAIL = process.env.EMAIL || "kurapatimahendra1@gmail.com";
+process.env.PASSWORD = process.env.PASSWORD || "ttcwlflfzoapimpt";
 const express=require('express')
 const cors=require('cors')
 const morgan=require("morgan")
