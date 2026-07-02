@@ -23,10 +23,10 @@ export const Signup = () => {
 
   // handles user redirection
   useEffect(()=>{
-    if(loggedInUser && !loggedInUser?.isVerified){
+    if(loggedInUser && loggedInUser?.isVerified === false){
       navigate("/verify-otp")
     }
-    else if(loggedInUser){
+    else if(loggedInUser && loggedInUser?.isVerified){
       navigate("/")
     }
   },[loggedInUser])

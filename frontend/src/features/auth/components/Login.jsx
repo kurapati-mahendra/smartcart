@@ -26,7 +26,7 @@ export const Login = () => {
     if(loggedInUser && loggedInUser?.isVerified){
       navigate("/")
     }
-    else if(loggedInUser && !loggedInUser?.isVerified){
+    else if(loggedInUser && loggedInUser?.isVerified === false){
       navigate("/verify-otp")
     }
   },[loggedInUser])
