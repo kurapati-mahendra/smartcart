@@ -24,7 +24,14 @@ connectToDB()
 
 
 // middlewares
-server.use(cors({origin:process.env.ORIGIN,credentials:true,exposedHeaders:['X-Total-Count'],methods:['GET','POST','PATCH','DELETE']}))
+server.use(cors({
+    origin: (origin, callback) => {
+        callback(null, true)
+    },
+    credentials:true,
+    exposedHeaders:['X-Total-Count'],
+    methods:['GET','POST','PATCH','DELETE']
+}))
 server.use(express.json())
 server.use(cookieParser())
 server.use(morgan("tiny"))
