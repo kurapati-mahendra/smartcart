@@ -80,6 +80,12 @@ export const OtpVerfication = () => {
         }
     },[otpVerificationStatus])
 
+    useEffect(()=>{
+        return ()=>{
+            dispatch(resetResendOtpStatus())
+        }
+    },[])
+
   return (
     <Stack width={'100vw'} height={'100vh'} noValidate flexDirection={'column'} rowGap={3} justifyContent="center" alignItems="center" >
 
