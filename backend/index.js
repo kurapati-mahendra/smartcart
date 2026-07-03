@@ -5,6 +5,7 @@ process.env.MONGO_URI = process.env.MONGO_URI || "mongodb+srv://kurapatimahendra
 process.env.JWT_SECRET = process.env.JWT_SECRET || "mysecret123";
 process.env.SECRET_KEY = process.env.SECRET_KEY || "mysecret123";
 process.env.PRODUCTION = "true"; // FORCE true for cross-origin cookies (Vercel <-> Render)
+process.env.ORIGIN = process.env.ORIGIN || "https://smartcart-git-main-mahendra13.vercel.app";
 process.env.COOKIE_EXPIRATION_DAYS = process.env.COOKIE_EXPIRATION_DAYS || "30";
 process.env.OTP_EXPIRATION_TIME = process.env.OTP_EXPIRATION_TIME || "120000";
 process.env.PASSWORD_RESET_TOKEN_EXPIRATION = process.env.PASSWORD_RESET_TOKEN_EXPIRATION || "2m";
@@ -66,6 +67,7 @@ server.get("/",(req,res)=>{
     res.status(200).json({message:'running'})
 })
 
-server.listen(8000,()=>{
-    console.log('server [STARTED] ~ https://smartcart-backend-6kpv.onrender.com');
+const PORT = process.env.PORT || 8000;
+server.listen(PORT,()=>{
+    console.log(`server [STARTED] ~ port ${PORT}`);
 })
