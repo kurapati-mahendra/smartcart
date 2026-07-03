@@ -1,7 +1,7 @@
 import {Button, FormHelperText, Paper, Stack, TextField, Typography } from '@mui/material'
 import React, { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearOtpVerificationError, clearResendOtpError, clearResendOtpSuccessMessage, resendOtpAsync, resetOtpVerificationStatus, resetResendOtpStatus, selectLoggedInUser, selectOtpVerificationError, selectOtpVerificationStatus, selectResendOtpError, selectResendOtpStatus, selectResendOtpSuccessMessage, verifyOtpAsync } from '../AuthSlice'
+import { clearOtpVerificationError, clearResendOtpError, clearResendOtpSuccessMessage, resendOtpAsync, resetOtpVerificationStatus, resetResendOtpStatus, selectLoggedInUser, selectOtpVerificationError, selectOtpVerificationStatus, selectResendOtpError, selectResendOtpStatus, selectResendOtpSuccessMessage, verifyOtpAsync, logoutAsync } from '../AuthSlice'
 import { LoadingButton } from '@mui/lab'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form"
@@ -39,6 +39,11 @@ export const OtpVerfication = () => {
         const cred={...data,userId:loggedInUser?._id}
         dispatch(verifyOtpAsync(cred))
     }
+
+    const handleLogout=()=>{
+        dispatch(logoutAsync())
+    }
+
 
     // handles resend otp error
     useEffect(()=>{
@@ -118,8 +123,11 @@ export const OtpVerfication = () => {
                 <LoadingButton onClick={handleSendOtp} loading={resendOtpStatus==='pending'} fullWidth variant='contained'>Get OTP</LoadingButton>
                 </>
              }
+             
+             <Button onClick={handleLogout} variant='text' color='error' fullWidth sx={{mt: 2}}>Logout / Use Another Account</Button>
 
         </Stack>
     </Stack>
   )
 }
+
